@@ -1,0 +1,449 @@
+2025-03-10 14:28:52,108 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:29:21,926 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:29:21,927 - INFO - Setting up Chrome driver
+2025-03-10 14:29:56,686 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:29:56,686 - INFO - Setting up Chrome driver
+2025-03-10 14:29:57,935 - INFO - Setting up cookie
+2025-03-10 14:29:57,935 - INFO - Adding cookie to the browser session
+2025-03-10 14:30:35,639 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:30:35,640 - INFO - Setting up Chrome driver
+2025-03-10 14:30:36,883 - INFO - Setting up cookie
+2025-03-10 14:30:36,883 - INFO - Opening the Uber Eats website
+2025-03-10 14:30:43,245 - INFO - Adding cookie to the browser session
+2025-03-10 14:32:35,954 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:32:35,955 - INFO - Setting up Chrome driver
+2025-03-10 14:32:38,001 - INFO - Setting up cookie
+2025-03-10 14:32:38,001 - INFO - Opening the Uber Eats website
+2025-03-10 14:32:44,834 - INFO - Adding cookie to the browser session
+2025-03-10 14:32:44,852 - INFO - Refreshing the page
+2025-03-10 14:33:45,820 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:33:45,820 - INFO - Setting up Chrome driver
+2025-03-10 14:33:47,724 - INFO - Setting up cookie
+2025-03-10 14:33:47,728 - INFO - Opening the Uber Eats website
+2025-03-10 14:33:54,420 - INFO - Adding cookie to the browser session
+2025-03-10 14:33:54,439 - INFO - Refreshing the page
+2025-03-10 14:33:57,091 - INFO - Waiting for the menu items to load
+2025-03-10 14:37:50,094 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:37:50,094 - INFO - Setting up Chrome driver
+2025-03-10 14:37:52,428 - INFO - Opening the Uber Eats website
+2025-03-10 14:37:56,173 - INFO - Setting up cookie
+2025-03-10 14:37:56,175 - INFO - Adding cookie to the browser session
+2025-03-10 14:37:56,188 - INFO - Refreshing the page
+2025-03-10 14:38:00,488 - INFO - Waiting for the menu items to load
+2025-03-10 14:38:00,666 - ERROR - Error: unhashable type: 'dict'
+2025-03-10 14:39:02,538 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:39:02,538 - INFO - Setting up Chrome driver
+2025-03-10 14:39:04,836 - INFO - Opening the Uber Eats website
+2025-03-10 14:39:07,489 - INFO - Setting up cookie
+2025-03-10 14:39:07,490 - INFO - Adding cookie to the browser session
+2025-03-10 14:39:07,505 - INFO - Refreshing the page
+2025-03-10 14:39:07,946 - INFO - Waiting for the menu items to load
+2025-03-10 14:39:48,692 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:39:48,692 - INFO - Setting up Chrome driver
+2025-03-10 14:39:50,445 - INFO - Opening the Uber Eats website
+2025-03-10 14:39:53,139 - INFO - Setting up cookie
+2025-03-10 14:39:53,139 - INFO - Adding cookie to the browser session
+2025-03-10 14:39:53,152 - INFO - Refreshing the page
+2025-03-10 14:39:56,438 - INFO - Waiting for the menu items to load
+2025-03-10 14:39:57,481 - ERROR - Error: Message: no such element: Unable to locate element: {"method":"xpath","selector":".//span[contains(text(), '$')]"}
+  (Session info: chrome=134.0.6998.88); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+0   chromedriver                        0x00000001011d1804 cxxbridge1$str$ptr + 2785964
+1   chromedriver                        0x00000001011c9ddc cxxbridge1$str$ptr + 2754692
+2   chromedriver                        0x0000000100d1dea8 cxxbridge1$string$len + 92928
+3   chromedriver                        0x0000000100d651d0 cxxbridge1$string$len + 384552
+4   chromedriver                        0x0000000100d5a878 cxxbridge1$string$len + 341200
+5   chromedriver                        0x0000000100da6678 cxxbridge1$string$len + 651984
+6   chromedriver                        0x0000000100d5935c cxxbridge1$string$len + 335796
+7   chromedriver                        0x0000000101196cd4 cxxbridge1$str$ptr + 2545532
+8   chromedriver                        0x0000000101199fa0 cxxbridge1$str$ptr + 2558536
+9   chromedriver                        0x0000000101176d04 cxxbridge1$str$ptr + 2414508
+10  chromedriver                        0x000000010119a800 cxxbridge1$str$ptr + 2560680
+11  chromedriver                        0x0000000101167ba0 cxxbridge1$str$ptr + 2352712
+12  chromedriver                        0x00000001011ba45c cxxbridge1$str$ptr + 2690820
+13  chromedriver                        0x00000001011ba5e4 cxxbridge1$str$ptr + 2691212
+14  chromedriver                        0x00000001011c9a50 cxxbridge1$str$ptr + 2753784
+15  libsystem_pthread.dylib             0x00000001961802e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019617b0fc thread_start + 8
+
+2025-03-10 14:40:12,188 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:40:12,189 - INFO - Setting up Chrome driver
+2025-03-10 14:40:13,839 - INFO - Opening the Uber Eats website
+2025-03-10 14:40:16,585 - INFO - Setting up cookie
+2025-03-10 14:40:16,586 - INFO - Adding cookie to the browser session
+2025-03-10 14:40:16,595 - INFO - Refreshing the page
+2025-03-10 14:40:19,623 - INFO - Waiting for the menu items to load
+2025-03-10 14:40:57,203 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:40:57,203 - INFO - Setting up Chrome driver
+2025-03-10 14:40:59,061 - INFO - Opening the Uber Eats website
+2025-03-10 14:41:01,787 - INFO - Setting up cookie
+2025-03-10 14:41:01,788 - INFO - Adding cookie to the browser session
+2025-03-10 14:41:01,798 - INFO - Refreshing the page
+2025-03-10 14:41:05,607 - INFO - Waiting for the menu items to load
+2025-03-10 14:41:07,119 - ERROR - Error: Message: no such element: Unable to locate element: {"method":"xpath","selector":".//span[contains(text(), '$')]"}
+  (Session info: chrome=134.0.6998.88); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+0   chromedriver                        0x0000000102f31804 cxxbridge1$str$ptr + 2785964
+1   chromedriver                        0x0000000102f29ddc cxxbridge1$str$ptr + 2754692
+2   chromedriver                        0x0000000102a7dea8 cxxbridge1$string$len + 92928
+3   chromedriver                        0x0000000102ac51d0 cxxbridge1$string$len + 384552
+4   chromedriver                        0x0000000102aba878 cxxbridge1$string$len + 341200
+5   chromedriver                        0x0000000102b06678 cxxbridge1$string$len + 651984
+6   chromedriver                        0x0000000102ab935c cxxbridge1$string$len + 335796
+7   chromedriver                        0x0000000102ef6cd4 cxxbridge1$str$ptr + 2545532
+8   chromedriver                        0x0000000102ef9fa0 cxxbridge1$str$ptr + 2558536
+9   chromedriver                        0x0000000102ed6d04 cxxbridge1$str$ptr + 2414508
+10  chromedriver                        0x0000000102efa800 cxxbridge1$str$ptr + 2560680
+11  chromedriver                        0x0000000102ec7ba0 cxxbridge1$str$ptr + 2352712
+12  chromedriver                        0x0000000102f1a45c cxxbridge1$str$ptr + 2690820
+13  chromedriver                        0x0000000102f1a5e4 cxxbridge1$str$ptr + 2691212
+14  chromedriver                        0x0000000102f29a50 cxxbridge1$str$ptr + 2753784
+15  libsystem_pthread.dylib             0x00000001961802e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019617b0fc thread_start + 8
+
+2025-03-10 14:41:23,547 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:41:23,547 - INFO - Setting up Chrome driver
+2025-03-10 14:41:25,328 - INFO - Opening the Uber Eats website
+2025-03-10 14:41:28,026 - INFO - Setting up cookie
+2025-03-10 14:41:28,032 - INFO - Adding cookie to the browser session
+2025-03-10 14:41:28,044 - INFO - Refreshing the page
+2025-03-10 14:41:28,566 - INFO - Waiting for the menu items to load
+2025-03-10 14:41:34,277 - ERROR - Error: Message: no such element: Unable to locate element: {"method":"xpath","selector":".//span[contains(text(), '$')]"}
+  (Session info: chrome=134.0.6998.88); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+0   chromedriver                        0x00000001007fd804 cxxbridge1$str$ptr + 2785964
+1   chromedriver                        0x00000001007f5ddc cxxbridge1$str$ptr + 2754692
+2   chromedriver                        0x0000000100349ea8 cxxbridge1$string$len + 92928
+3   chromedriver                        0x00000001003911d0 cxxbridge1$string$len + 384552
+4   chromedriver                        0x0000000100386878 cxxbridge1$string$len + 341200
+5   chromedriver                        0x00000001003d2678 cxxbridge1$string$len + 651984
+6   chromedriver                        0x000000010038535c cxxbridge1$string$len + 335796
+7   chromedriver                        0x00000001007c2cd4 cxxbridge1$str$ptr + 2545532
+8   chromedriver                        0x00000001007c5fa0 cxxbridge1$str$ptr + 2558536
+9   chromedriver                        0x00000001007a2d04 cxxbridge1$str$ptr + 2414508
+10  chromedriver                        0x00000001007c6800 cxxbridge1$str$ptr + 2560680
+11  chromedriver                        0x0000000100793ba0 cxxbridge1$str$ptr + 2352712
+12  chromedriver                        0x00000001007e645c cxxbridge1$str$ptr + 2690820
+13  chromedriver                        0x00000001007e65e4 cxxbridge1$str$ptr + 2691212
+14  chromedriver                        0x00000001007f5a50 cxxbridge1$str$ptr + 2753784
+15  libsystem_pthread.dylib             0x00000001961802e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019617b0fc thread_start + 8
+
+2025-03-10 14:42:36,898 - INFO - Starting scraping for restaurant: subway
+2025-03-10 14:42:36,898 - INFO - Setting up Chrome driver
+2025-03-10 14:42:38,613 - INFO - Opening the Uber Eats website
+2025-03-10 14:42:42,102 - INFO - Setting up cookie
+2025-03-10 14:42:42,104 - INFO - Adding cookie to the browser session
+2025-03-10 14:42:42,119 - INFO - Refreshing the page
+2025-03-10 14:42:45,468 - INFO - Waiting for the menu items to load
+2025-03-10 14:45:28,454 - INFO - Starting scraping for restaurant: subway
+2025-03-10 14:45:28,454 - INFO - Setting up Chrome driver
+2025-03-10 14:45:30,742 - INFO - Opening the Uber Eats website
+2025-03-10 14:45:34,417 - INFO - Setting up cookie
+2025-03-10 14:45:34,419 - INFO - Adding cookie to the browser session
+2025-03-10 14:45:34,439 - INFO - Refreshing the page
+2025-03-10 14:45:39,073 - INFO - Waiting for the menu items to load
+2025-03-10 14:47:08,190 - INFO - Starting scraping for restaurant: mcdonalds
+2025-03-10 14:47:08,190 - INFO - Setting up Chrome driver
+2025-03-10 14:47:10,159 - INFO - Opening the Uber Eats website
+2025-03-10 14:47:13,564 - INFO - Setting up cookie
+2025-03-10 14:47:13,566 - INFO - Adding cookie to the browser session
+2025-03-10 14:47:13,583 - INFO - Refreshing the page
+2025-03-10 14:47:16,677 - INFO - Waiting for the menu items to load
+2025-03-10 14:48:17,042 - INFO - Starting scraping for restaurant: mcdonalds
+2025-03-10 14:48:17,043 - INFO - Setting up Chrome driver
+2025-03-10 14:48:19,276 - INFO - Opening the Uber Eats website
+2025-03-10 14:48:22,311 - INFO - Setting up cookie
+2025-03-10 14:48:22,312 - INFO - Adding cookie to the browser session
+2025-03-10 14:48:22,326 - INFO - Refreshing the page
+2025-03-10 14:48:34,655 - INFO - Waiting for the menu items to load
+2025-03-10 14:52:28,581 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:52:28,581 - INFO - Starting scraping for restaurant: mcdonalds
+2025-03-10 14:52:28,581 - INFO - Starting scraping for restaurant: starbucks
+2025-03-10 14:52:28,581 - INFO - Starting scraping for restaurant: subway
+2025-03-10 14:52:28,581 - INFO - Starting scraping for restaurant: taco-bell
+2025-03-10 14:52:28,581 - INFO - Setting up Chrome driver
+2025-03-10 14:52:28,581 - INFO - Setting up Chrome driver
+2025-03-10 14:52:28,581 - INFO - Setting up Chrome driver
+2025-03-10 14:52:28,581 - INFO - Setting up Chrome driver
+2025-03-10 14:52:28,581 - INFO - Setting up Chrome driver
+2025-03-10 14:52:32,871 - INFO - Opening the Uber Eats website
+2025-03-10 14:52:33,127 - INFO - Opening the Uber Eats website
+2025-03-10 14:52:33,446 - INFO - Opening the Uber Eats website
+2025-03-10 14:52:34,938 - INFO - Opening the Uber Eats website
+2025-03-10 14:52:35,680 - INFO - Opening the Uber Eats website
+2025-03-10 14:52:39,386 - INFO - Setting up cookie
+2025-03-10 14:52:39,442 - INFO - Adding cookie to the browser session
+2025-03-10 14:52:39,250 - INFO - Setting up cookie
+2025-03-10 14:52:39,475 - INFO - Adding cookie to the browser session
+2025-03-10 14:52:39,686 - INFO - Refreshing the page
+2025-03-10 14:52:39,885 - INFO - Refreshing the page
+2025-03-10 14:52:40,550 - INFO - Setting up cookie
+2025-03-10 14:52:40,666 - INFO - Adding cookie to the browser session
+2025-03-10 14:52:41,431 - INFO - Refreshing the page
+2025-03-10 14:52:41,593 - INFO - Setting up cookie
+2025-03-10 14:52:41,598 - INFO - Adding cookie to the browser session
+2025-03-10 14:52:41,772 - INFO - Refreshing the page
+2025-03-10 14:52:45,094 - INFO - Waiting for the menu items to load
+2025-03-10 14:52:47,710 - INFO - Waiting for the menu items to load
+2025-03-10 14:52:48,847 - INFO - Setting up cookie
+2025-03-10 14:52:48,848 - INFO - Adding cookie to the browser session
+2025-03-10 14:52:49,070 - INFO - Refreshing the page
+2025-03-10 14:52:58,261 - INFO - Waiting for the menu items to load
+2025-03-10 14:52:58,275 - INFO - Waiting for the menu items to load
+2025-03-10 14:53:03,164 - INFO - Waiting for the menu items to load
+2025-03-10 14:53:04,068 - ERROR - Error: Message: no such element: Unable to locate element: {"method":"xpath","selector":".//span[contains(text(), '$')]"}
+  (Session info: chrome=134.0.6998.88); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+0   chromedriver                        0x0000000104631804 cxxbridge1$str$ptr + 2785964
+1   chromedriver                        0x0000000104629ddc cxxbridge1$str$ptr + 2754692
+2   chromedriver                        0x000000010417dea8 cxxbridge1$string$len + 92928
+3   chromedriver                        0x00000001041c51d0 cxxbridge1$string$len + 384552
+4   chromedriver                        0x00000001041ba878 cxxbridge1$string$len + 341200
+5   chromedriver                        0x0000000104206678 cxxbridge1$string$len + 651984
+6   chromedriver                        0x00000001041b935c cxxbridge1$string$len + 335796
+7   chromedriver                        0x00000001045f6cd4 cxxbridge1$str$ptr + 2545532
+8   chromedriver                        0x00000001045f9fa0 cxxbridge1$str$ptr + 2558536
+9   chromedriver                        0x00000001045d6d04 cxxbridge1$str$ptr + 2414508
+10  chromedriver                        0x00000001045fa800 cxxbridge1$str$ptr + 2560680
+11  chromedriver                        0x00000001045c7ba0 cxxbridge1$str$ptr + 2352712
+12  chromedriver                        0x000000010461a45c cxxbridge1$str$ptr + 2690820
+13  chromedriver                        0x000000010461a5e4 cxxbridge1$str$ptr + 2691212
+14  chromedriver                        0x0000000104629a50 cxxbridge1$str$ptr + 2753784
+15  libsystem_pthread.dylib             0x00000001961802e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019617b0fc thread_start + 8
+
+2025-03-10 14:53:08,550 - ERROR - Error: Message: 
+
+2025-03-10 14:54:55,137 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:54:55,137 - INFO - Starting scraping for restaurant: mcdonalds
+2025-03-10 14:54:55,137 - INFO - Starting scraping for restaurant: starbucks
+2025-03-10 14:54:55,137 - INFO - Starting scraping for restaurant: subway
+2025-03-10 14:54:55,137 - INFO - Starting scraping for restaurant: taco-bell
+2025-03-10 14:54:55,137 - INFO - Setting up Chrome driver
+2025-03-10 14:54:55,137 - INFO - Setting up Chrome driver
+2025-03-10 14:54:55,138 - INFO - Setting up Chrome driver
+2025-03-10 14:54:55,138 - INFO - Setting up Chrome driver
+2025-03-10 14:54:55,138 - INFO - Setting up Chrome driver
+2025-03-10 14:54:57,150 - INFO - Opening the Uber Eats website
+2025-03-10 14:54:57,153 - INFO - Opening the Uber Eats website
+2025-03-10 14:54:57,153 - INFO - Opening the Uber Eats website
+2025-03-10 14:54:57,153 - INFO - Opening the Uber Eats website
+2025-03-10 14:54:57,153 - INFO - Opening the Uber Eats website
+2025-03-10 14:54:58,471 - INFO - Setting up cookie
+2025-03-10 14:54:58,473 - INFO - Adding cookie to the browser session
+2025-03-10 14:54:58,498 - INFO - Setting up cookie
+2025-03-10 14:54:58,498 - INFO - Adding cookie to the browser session
+2025-03-10 14:55:02,170 - INFO - Refreshing the page
+2025-03-10 14:55:02,171 - INFO - Refreshing the page
+2025-03-10 14:55:02,710 - INFO - Setting up cookie
+2025-03-10 14:55:02,710 - INFO - Adding cookie to the browser session
+2025-03-10 14:55:02,877 - INFO - Refreshing the page
+2025-03-10 14:55:03,082 - INFO - Setting up cookie
+2025-03-10 14:55:03,082 - INFO - Adding cookie to the browser session
+2025-03-10 14:55:03,205 - INFO - Setting up cookie
+2025-03-10 14:55:03,206 - INFO - Adding cookie to the browser session
+2025-03-10 14:55:03,274 - INFO - Refreshing the page
+2025-03-10 14:55:03,275 - INFO - Refreshing the page
+2025-03-10 14:55:12,530 - INFO - Waiting for the menu items to load
+2025-03-10 14:55:12,963 - INFO - Waiting for the menu items to load
+2025-03-10 14:55:17,304 - INFO - Waiting for the menu items to load
+2025-03-10 14:55:17,307 - INFO - Waiting for the menu items to load
+2025-03-10 14:55:17,334 - INFO - Waiting for the menu items to load
+2025-03-10 14:55:18,498 - ERROR - Error: Message: no such element: Unable to locate element: {"method":"xpath","selector":".//span[contains(text(), '$')]"}
+  (Session info: chrome=134.0.6998.88); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+0   chromedriver                        0x0000000102879804 cxxbridge1$str$ptr + 2785964
+1   chromedriver                        0x0000000102871ddc cxxbridge1$str$ptr + 2754692
+2   chromedriver                        0x00000001023c5ea8 cxxbridge1$string$len + 92928
+3   chromedriver                        0x000000010240d1d0 cxxbridge1$string$len + 384552
+4   chromedriver                        0x0000000102402878 cxxbridge1$string$len + 341200
+5   chromedriver                        0x000000010244e678 cxxbridge1$string$len + 651984
+6   chromedriver                        0x000000010240135c cxxbridge1$string$len + 335796
+7   chromedriver                        0x000000010283ecd4 cxxbridge1$str$ptr + 2545532
+8   chromedriver                        0x0000000102841fa0 cxxbridge1$str$ptr + 2558536
+9   chromedriver                        0x000000010281ed04 cxxbridge1$str$ptr + 2414508
+10  chromedriver                        0x0000000102842800 cxxbridge1$str$ptr + 2560680
+11  chromedriver                        0x000000010280fba0 cxxbridge1$str$ptr + 2352712
+12  chromedriver                        0x000000010286245c cxxbridge1$str$ptr + 2690820
+13  chromedriver                        0x00000001028625e4 cxxbridge1$str$ptr + 2691212
+14  chromedriver                        0x0000000102871a50 cxxbridge1$str$ptr + 2753784
+15  libsystem_pthread.dylib             0x00000001961802e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019617b0fc thread_start + 8
+
+2025-03-10 14:55:22,865 - ERROR - Error: Message: 
+
+2025-03-10 14:55:52,362 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:55:52,362 - INFO - Starting scraping for restaurant: mcdonalds
+2025-03-10 14:55:52,362 - INFO - Setting up Chrome driver
+2025-03-10 14:55:52,362 - INFO - Starting scraping for restaurant: starbucks
+2025-03-10 14:55:52,362 - INFO - Starting scraping for restaurant: subway
+2025-03-10 14:55:52,362 - INFO - Setting up Chrome driver
+2025-03-10 14:55:52,362 - INFO - Starting scraping for restaurant: taco-bell
+2025-03-10 14:55:52,362 - INFO - Setting up Chrome driver
+2025-03-10 14:55:52,362 - INFO - Setting up Chrome driver
+2025-03-10 14:55:52,363 - INFO - Setting up Chrome driver
+2025-03-10 14:55:53,493 - INFO - Opening the Uber Eats website
+2025-03-10 14:55:53,494 - INFO - Opening the Uber Eats website
+2025-03-10 14:55:53,625 - INFO - Opening the Uber Eats website
+2025-03-10 14:55:53,627 - INFO - Opening the Uber Eats website
+2025-03-10 14:55:53,738 - INFO - Opening the Uber Eats website
+2025-03-10 14:55:55,239 - INFO - Setting up cookie
+2025-03-10 14:55:55,243 - INFO - Adding cookie to the browser session
+2025-03-10 14:55:57,491 - INFO - Refreshing the page
+2025-03-10 14:55:57,691 - INFO - Setting up cookie
+2025-03-10 14:55:57,691 - INFO - Adding cookie to the browser session
+2025-03-10 14:55:57,734 - INFO - Refreshing the page
+2025-03-10 14:55:57,743 - INFO - Setting up cookie
+2025-03-10 14:55:57,744 - INFO - Adding cookie to the browser session
+2025-03-10 14:55:58,010 - INFO - Refreshing the page
+2025-03-10 14:55:58,319 - INFO - Setting up cookie
+2025-03-10 14:55:58,353 - INFO - Adding cookie to the browser session
+2025-03-10 14:55:59,204 - INFO - Setting up cookie
+2025-03-10 14:55:59,206 - INFO - Adding cookie to the browser session
+2025-03-10 14:55:59,331 - INFO - Refreshing the page
+2025-03-10 14:55:59,651 - INFO - Refreshing the page
+2025-03-10 14:56:08,870 - INFO - Waiting for the menu items to load
+2025-03-10 14:56:16,737 - INFO - Waiting for the menu items to load
+2025-03-10 14:56:17,473 - INFO - Waiting for the menu items to load
+2025-03-10 14:56:17,474 - INFO - Waiting for the menu items to load
+2025-03-10 14:56:17,547 - INFO - Waiting for the menu items to load
+2025-03-10 14:56:18,800 - ERROR - Error: Message: no such element: Unable to locate element: {"method":"xpath","selector":".//span[contains(text(), '$')]"}
+  (Session info: chrome=134.0.6998.88); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+0   chromedriver                        0x0000000100c49804 cxxbridge1$str$ptr + 2785964
+1   chromedriver                        0x0000000100c41ddc cxxbridge1$str$ptr + 2754692
+2   chromedriver                        0x0000000100795ea8 cxxbridge1$string$len + 92928
+3   chromedriver                        0x00000001007dd1d0 cxxbridge1$string$len + 384552
+4   chromedriver                        0x00000001007d2878 cxxbridge1$string$len + 341200
+5   chromedriver                        0x000000010081e678 cxxbridge1$string$len + 651984
+6   chromedriver                        0x00000001007d135c cxxbridge1$string$len + 335796
+7   chromedriver                        0x0000000100c0ecd4 cxxbridge1$str$ptr + 2545532
+8   chromedriver                        0x0000000100c11fa0 cxxbridge1$str$ptr + 2558536
+9   chromedriver                        0x0000000100beed04 cxxbridge1$str$ptr + 2414508
+10  chromedriver                        0x0000000100c12800 cxxbridge1$str$ptr + 2560680
+11  chromedriver                        0x0000000100bdfba0 cxxbridge1$str$ptr + 2352712
+12  chromedriver                        0x0000000100c3245c cxxbridge1$str$ptr + 2690820
+13  chromedriver                        0x0000000100c325e4 cxxbridge1$str$ptr + 2691212
+14  chromedriver                        0x0000000100c41a50 cxxbridge1$str$ptr + 2753784
+15  libsystem_pthread.dylib             0x00000001961802e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019617b0fc thread_start + 8
+
+2025-03-10 14:56:22,827 - ERROR - Error: Message: 
+
+2025-03-10 14:59:00,588 - INFO - Starting scraping for restaurant: chipotle
+2025-03-10 14:59:00,588 - INFO - Starting scraping for restaurant: mcdonalds
+2025-03-10 14:59:00,589 - INFO - Starting scraping for restaurant: starbucks
+2025-03-10 14:59:00,589 - INFO - Starting scraping for restaurant: subway
+2025-03-10 14:59:00,589 - INFO - Starting scraping for restaurant: taco-bell
+2025-03-10 14:59:00,589 - INFO - Setting up Chrome driver
+2025-03-10 14:59:00,589 - INFO - Setting up Chrome driver
+2025-03-10 14:59:00,589 - INFO - Setting up Chrome driver
+2025-03-10 14:59:00,589 - INFO - Setting up Chrome driver
+2025-03-10 14:59:00,589 - INFO - Setting up Chrome driver
+2025-03-10 14:59:02,556 - INFO - Opening the Uber Eats website
+2025-03-10 14:59:02,557 - INFO - Opening the Uber Eats website
+2025-03-10 14:59:02,557 - INFO - Opening the Uber Eats website
+2025-03-10 14:59:02,552 - INFO - Opening the Uber Eats website
+2025-03-10 14:59:02,559 - INFO - Opening the Uber Eats website
+2025-03-10 14:59:03,955 - INFO - Setting up cookie
+2025-03-10 14:59:03,956 - INFO - Adding cookie to the browser session
+2025-03-10 14:59:10,409 - INFO - Refreshing the page
+2025-03-10 14:59:11,074 - INFO - Setting up cookie
+2025-03-10 14:59:11,074 - INFO - Adding cookie to the browser session
+2025-03-10 14:59:11,080 - INFO - Refreshing the page
+2025-03-10 14:59:11,210 - INFO - Setting up cookie
+2025-03-10 14:59:11,214 - INFO - Adding cookie to the browser session
+2025-03-10 14:59:11,214 - INFO - Setting up cookie
+2025-03-10 14:59:11,264 - INFO - Adding cookie to the browser session
+2025-03-10 14:59:11,369 - INFO - Setting up cookie
+2025-03-10 14:59:11,369 - INFO - Adding cookie to the browser session
+2025-03-10 14:59:11,444 - INFO - Refreshing the page
+2025-03-10 14:59:11,451 - INFO - Refreshing the page
+2025-03-10 14:59:11,453 - INFO - Refreshing the page
+2025-03-10 14:59:18,619 - INFO - Waiting for the menu items to load
+2025-03-10 14:59:30,054 - INFO - Waiting for the menu items to load
+2025-03-10 14:59:30,060 - INFO - Waiting for the menu items to load
+2025-03-10 14:59:30,060 - INFO - Waiting for the menu items to load
+2025-03-10 14:59:30,081 - INFO - Waiting for the menu items to load
+2025-03-10 14:59:31,691 - ERROR - Error: Message: no such element: Unable to locate element: {"method":"xpath","selector":".//span[contains(text(), '$')]"}
+  (Session info: chrome=134.0.6998.88); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Stacktrace:
+0   chromedriver                        0x0000000104731804 cxxbridge1$str$ptr + 2785964
+1   chromedriver                        0x0000000104729ddc cxxbridge1$str$ptr + 2754692
+2   chromedriver                        0x000000010427dea8 cxxbridge1$string$len + 92928
+3   chromedriver                        0x00000001042c51d0 cxxbridge1$string$len + 384552
+4   chromedriver                        0x00000001042ba878 cxxbridge1$string$len + 341200
+5   chromedriver                        0x0000000104306678 cxxbridge1$string$len + 651984
+6   chromedriver                        0x00000001042b935c cxxbridge1$string$len + 335796
+7   chromedriver                        0x00000001046f6cd4 cxxbridge1$str$ptr + 2545532
+8   chromedriver                        0x00000001046f9fa0 cxxbridge1$str$ptr + 2558536
+9   chromedriver                        0x00000001046d6d04 cxxbridge1$str$ptr + 2414508
+10  chromedriver                        0x00000001046fa800 cxxbridge1$str$ptr + 2560680
+11  chromedriver                        0x00000001046c7ba0 cxxbridge1$str$ptr + 2352712
+12  chromedriver                        0x000000010471a45c cxxbridge1$str$ptr + 2690820
+13  chromedriver                        0x000000010471a5e4 cxxbridge1$str$ptr + 2691212
+14  chromedriver                        0x0000000104729a50 cxxbridge1$str$ptr + 2753784
+15  libsystem_pthread.dylib             0x00000001961802e4 _pthread_start + 136
+16  libsystem_pthread.dylib             0x000000019617b0fc thread_start + 8
+
+2025-03-10 14:59:33,862 - ERROR - Error: Message: 
+
+2025-03-10 15:10:07,563 - INFO - Starting scraping for restaurant: mcdonalds
+2025-03-10 15:10:07,564 - INFO - Starting scraping for restaurant: burgerking
+2025-03-10 15:10:07,566 - INFO - Starting scraping for restaurant: wendys
+2025-03-10 15:10:07,566 - INFO - Starting scraping for restaurant: tacobell
+2025-03-10 15:10:19,410 - ERROR - Error scraping burgerking: Message: 
+Stacktrace:
+0   chromedriver                        0x00000001052c9804 cxxbridge1$str$ptr + 2785964
+1   chromedriver                        0x00000001052c1ddc cxxbridge1$str$ptr + 2754692
+2   chromedriver                        0x0000000104e15ea8 cxxbridge1$string$len + 92928
+3   chromedriver                        0x0000000104e5d1d0 cxxbridge1$string$len + 384552
+4   chromedriver                        0x0000000104e9e678 cxxbridge1$string$len + 651984
+5   chromedriver                        0x0000000104e5135c cxxbridge1$string$len + 335796
+6   chromedriver                        0x000000010528ecd4 cxxbridge1$str$ptr + 2545532
+7   chromedriver                        0x0000000105291fa0 cxxbridge1$str$ptr + 2558536
+8   chromedriver                        0x000000010526ed04 cxxbridge1$str$ptr + 2414508
+9   chromedriver                        0x0000000105292800 cxxbridge1$str$ptr + 2560680
+10  chromedriver                        0x000000010525fba0 cxxbridge1$str$ptr + 2352712
+11  chromedriver                        0x00000001052b245c cxxbridge1$str$ptr + 2690820
+12  chromedriver                        0x00000001052b25e4 cxxbridge1$str$ptr + 2691212
+13  chromedriver                        0x00000001052c1a50 cxxbridge1$str$ptr + 2753784
+14  libsystem_pthread.dylib             0x00000001961802e4 _pthread_start + 136
+15  libsystem_pthread.dylib             0x000000019617b0fc thread_start + 8
+
+2025-03-10 15:10:19,581 - ERROR - Error scraping tacobell: Message: 
+Stacktrace:
+0   chromedriver                        0x0000000104eed804 cxxbridge1$str$ptr + 2785964
+1   chromedriver                        0x0000000104ee5ddc cxxbridge1$str$ptr + 2754692
+2   chromedriver                        0x0000000104a39ea8 cxxbridge1$string$len + 92928
+3   chromedriver                        0x0000000104a811d0 cxxbridge1$string$len + 384552
+4   chromedriver                        0x0000000104ac2678 cxxbridge1$string$len + 651984
+5   chromedriver                        0x0000000104a7535c cxxbridge1$string$len + 335796
+6   chromedriver                        0x0000000104eb2cd4 cxxbridge1$str$ptr + 2545532
+7   chromedriver                        0x0000000104eb5fa0 cxxbridge1$str$ptr + 2558536
+8   chromedriver                        0x0000000104e92d04 cxxbridge1$str$ptr + 2414508
+9   chromedriver                        0x0000000104eb6800 cxxbridge1$str$ptr + 2560680
+10  chromedriver                        0x0000000104e83ba0 cxxbridge1$str$ptr + 2352712
+11  chromedriver                        0x0000000104ed645c cxxbridge1$str$ptr + 2690820
+12  chromedriver                        0x0000000104ed65e4 cxxbridge1$str$ptr + 2691212
+13  chromedriver                        0x0000000104ee5a50 cxxbridge1$str$ptr + 2753784
+14  libsystem_pthread.dylib             0x00000001961802e4 _pthread_start + 136
+15  libsystem_pthread.dylib             0x000000019617b0fc thread_start + 8
+
+2025-03-10 15:10:19,696 - INFO - Starting scraping for restaurant: subway
+2025-03-10 15:10:44,869 - INFO - Starting scraping for restaurant: mcdonalds
+2025-03-10 15:10:44,870 - INFO - Starting scraping for restaurant: burger-king
+2025-03-10 15:10:44,871 - INFO - Starting scraping for restaurant: wendys
+2025-03-10 15:10:44,872 - INFO - Starting scraping for restaurant: taco-bell
+2025-03-10 15:10:59,599 - INFO - Starting scraping for restaurant: subway
+2025-03-10 15:15:33,216 - INFO - Starting scraping for restaurant: mcdonalds
+2025-03-10 15:15:33,218 - INFO - Starting scraping for restaurant: burger-king
+2025-03-10 15:15:33,219 - INFO - Starting scraping for restaurant: wendys
+2025-03-10 15:15:33,219 - INFO - Starting scraping for restaurant: taco-bell
+2025-03-10 15:15:51,009 - INFO - Starting scraping for restaurant: subway
+2025-03-10 15:16:27,700 - INFO - Starting scraping for restaurant: mcdonalds
+2025-03-10 15:16:27,701 - INFO - Starting scraping for restaurant: burger-king
+2025-03-10 15:16:27,702 - INFO - Starting scraping for restaurant: wendys
+2025-03-10 15:16:27,704 - INFO - Starting scraping for restaurant: taco-bell
+2025-03-10 15:16:27,724 - INFO - Starting scraping for restaurant: subway
