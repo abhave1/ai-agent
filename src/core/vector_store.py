@@ -1,98 +1,73 @@
 """
-Vector store module for managing FAISS indices.
+Simple vector store using FAISS.
 """
 
-from typing import List, Tuple, Optional, Dict, Any
-import numpy as np
 import faiss
+import numpy as np
+from typing import List, Dict, Any, Tuple
 from ..config.settings import VectorStoreConfig
 
 class VectorStore:
-    """Manages FAISS vector store for document embeddings."""
+    """Simple vector store using FAISS."""
     
-    def __init__(self, config: VectorStoreConfig = None):
-        """
-        Initialize the vector store with configuration.
+    def __init__(self, config: VectorStoreConfig):
+        """Initialize the vector store."""
+        self.config = config
+        self.index = None
+        self.metadata = []
+    
+    def add(self, embeddings: np.ndarray, metadata: List[Dict[str, Any]] = None) -> None:
+        """Add embeddings to the vector store.
         
         Args:
-            config: Vector store configuration
-        """
-        self.config = config or VectorStoreConfig()
-        self._index = None
-        self._metadata = []
-    
-    def _create_index(self, dimension: int) -> None:
-        """
-        Create a new FAISS index with the specified dimension.
-        
-        Args:
-            dimension: Dimension of the vectors
-        """
-        if self.config.index_type == "FlatL2":
-            self._index = faiss.IndexFlatL2(dimension)
-        else:
-            raise ValueError(f"Unsupported index type: {self.config.index_type}")
-    
-    def add(self, embeddings: np.ndarray, metadata: Optional[List[Dict[str, Any]]] = None) -> None:
-        """
-        Add embeddings and metadata to the vector store.
-        
-        Args:
-            embeddings: Numpy array of embeddings
-            metadata: Optional list of metadata dictionaries
+            embeddings: Matrix of embeddings to add
+            metadata: Optional metadata for each embedding
         """
         if embeddings is None or len(embeddings) == 0:
             return
+            
+        # Initialize index if needed
+        if self.index is None:
+            dimension = embeddings.shape[1]
+            self.index = faiss.IndexFlatL2(dimension)
         
-        # Create index if it doesn't exist
-        if self._index is None:
-            self._create_index(embeddings.shape[1])
-        
-        # Add embeddings to the index
-        self._index.add(embeddings.astype('float32'))
+        # Add embeddings to index
+        self.index.add(embeddings.astype('float32'))
         
         # Add metadata if provided
         if metadata:
-            self._metadata.extend(metadata)
-        else:
-            # Add empty metadata for each embedding
-            self._metadata.extend([{} for _ in range(len(embeddings))])
+            self.metadata.extend(metadata)
     
-    def search(self, query_embedding: np.ndarray, k: Optional[int] = None) -> List[Tuple[Dict[str, Any], float]]:
-        """
-        Search for similar vectors in the index.
+    def search(self, query_embedding: np.ndarray) -> List[Tuple[Dict[str, Any], float]]:
+        """Search for similar embeddings.
         
         Args:
             query_embedding: Query embedding vector
-            k: Number of results to return (defaults to config.top_k)
             
         Returns:
-            List of tuples containing (metadata, distance) for each result
+            List of (metadata, distance) tuples
         """
-        if self._index is None:
+        if self.index is None or self.index.ntotal == 0:
             return []
-        
-        k = k or self.config.top_k
-        k = min(k, self._index.ntotal)  # Ensure k is not larger than index size
-        
-        # Search the index
-        distances, indices = self._index.search(
+            
+        # Search in index
+        distances, indices = self.index.search(
             query_embedding.reshape(1, -1).astype('float32'),
-            k
+            min(self.config.top_k, self.index.ntotal)
         )
         
-        # Return results with metadata
+        # Get results with metadata
         results = []
-        for idx, distance in zip(indices[0], distances[0]):
-            if idx < len(self._metadata):  # Ensure valid index
-                results.append((self._metadata[idx], float(distance)))
+        for i, (idx, distance) in enumerate(zip(indices[0], distances[0])):
+            if idx < len(self.metadata):
+                results.append((self.metadata[idx], float(distance)))
         
         return results
     
     def clear(self) -> None:
-        """Clear all data from the vector store."""
-        self._index = None
-        self._metadata = []
+        """Clear the vector store."""
+        self.index = None
+        self.metadata = []
     
     def get_size(self) -> int:
         """
@@ -101,7 +76,7 @@ class VectorStore:
         Returns:
             int: Number of vectors
         """
-        return self._index.ntotal if self._index is not None else 0
+        return self.index.ntotal if self.index is not None else 0
     
     def save(self, index_path: str, metadata_path: str) -> None:
         """
@@ -111,12 +86,12 @@ class VectorStore:
             index_path: Path to save the FAISS index
             metadata_path: Path to save the metadata
         """
-        if self._index is not None:
-            faiss.write_index(self._index, index_path)
+        if self.index is not None:
+            faiss.write_index(self.index, index_path)
             # Save metadata (you might want to use a proper serialization method)
             import json
             with open(metadata_path, 'w') as f:
-                json.dump(self._metadata, f)
+                json.dump(self.metadata, f)
     
     def load(self, index_path: str, metadata_path: str) -> None:
         """
@@ -126,8 +101,8 @@ class VectorStore:
             index_path: Path to the FAISS index
             metadata_path: Path to the metadata
         """
-        self._index = faiss.read_index(index_path)
+        self.index = faiss.read_index(index_path)
         # Load metadata (you might want to use a proper deserialization method)
         import json
         with open(metadata_path, 'r') as f:
-            self._metadata = json.load(f) 
+            self.metadata = json.load(f) 

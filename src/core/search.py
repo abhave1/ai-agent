@@ -1,63 +1,31 @@
 """
-Web search module using DuckDuckGo API.
+Simple web search module using DuckDuckGo.
 """
 
-from typing import List, Dict, Any
+from typing import List
 from duckduckgo_search import DDGS
 from ..config.settings import SearchConfig
 
-class WebSearcher:
-    """Handles web searches using DuckDuckGo API."""
+class WebSearch:
+    """Simple web search using DuckDuckGo."""
     
-    def __init__(self, config: SearchConfig = None):
-        """Initialize the web searcher with configuration."""
-        self.config = config or SearchConfig()
-        self._ddgs = DDGS()
+    def __init__(self, config: SearchConfig):
+        """Initialize the web search."""
+        self.config = config
+        self.ddgs = DDGS()
     
-    def search(self, query: str) -> List[Dict[str, Any]]:
-        """
-        Perform a web search using DuckDuckGo.
+    def search(self, query: str) -> List[str]:
+        """Search for URLs related to the query.
         
         Args:
-            query: The search query string
+            query: Search query
             
         Returns:
-            List of dictionaries containing search results with keys:
-            - title: The title of the webpage
-            - link: The URL of the webpage
-            - snippet: A brief description of the content
+            List of relevant URLs
         """
         try:
-            results = list(self._ddgs.text(
-                query,
-                max_results=self.config.max_results
-            ))
-            
-            # Format results into a consistent structure
-            formatted_results = []
-            for result in results:
-                if result.get('link'):  # Only include results with valid URLs
-                    formatted_results.append({
-                        'title': result.get('title', ''),
-                        'link': result.get('link', ''),
-                        'snippet': result.get('body', '')
-                    })
-            
-            return formatted_results
-            
+            results = self.ddgs.text(query, max_results=self.config.max_results)
+            return [result['link'] for result in results]
         except Exception as e:
-            print(f"Error performing web search: {str(e)}")
-            return []
-    
-    def get_urls(self, query: str) -> List[str]:
-        """
-        Get only the URLs from search results.
-        
-        Args:
-            query: The search query string
-            
-        Returns:
-            List of URLs from search results
-        """
-        results = self.search(query)
-        return [result['link'] for result in results if result.get('link')] 
+            print(f"Error during web search: {str(e)}")
+            return [] 

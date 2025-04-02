@@ -1,38 +1,30 @@
 """
-LLM interaction module for the AI Agent.
+Simple LLM client for text generation.
 """
 
 import requests
 import time
-from typing import Optional, Dict, Any
+from typing import Optional
 from ..config.settings import LLMConfig
 
 class LLMClient:
     """Client for interacting with the LLM service."""
     
     def __init__(self, config: LLMConfig):
-        """Initialize the LLM client.
-        
-        Args:
-            config: LLM configuration settings
-        """
+        """Initialize the LLM client."""
         self.config = config
         self.base_url = "http://localhost:11434"
         self.session = requests.Session()
-        self.session.timeout = (30, config.timeout)  # (connect timeout, read timeout)
+        self.session.timeout = (30, config.timeout)
     
-    def generate_response(self, prompt: str, context: Optional[str] = None) -> str:
+    def generate(self, prompt: str) -> str:
         """Generate a response using the LLM.
         
         Args:
             prompt: The input prompt
-            context: Optional context information
             
         Returns:
             Generated response text
-            
-        Raises:
-            Exception: If generation fails
         """
         payload = {
             "model": self.config.model_name,
@@ -40,14 +32,10 @@ class LLMClient:
             "stream": False,
             "options": {
                 "temperature": self.config.temperature,
-                "top_p": self.config.top_p,
                 "num_predict": self.config.max_tokens
             }
         }
         
-        if context:
-            payload["context"] = context
-            
         for attempt in range(self.config.retry_attempts):
             try:
                 response = self.session.post(

@@ -36,14 +36,12 @@ class VectorStoreConfig:
 @dataclass
 class LLMConfig:
     """LLM configuration."""
-    model_name: str = "llama2"
+    model_name: str = "llama2:1b"  # Using a smaller 1B parameter model
     temperature: float = 0.7
-    max_tokens: int = 2048
-    top_p: float = 0.9
-    context_window: int = 4096
-    timeout: int = 120  # 2 minutes timeout
-    retry_attempts: int = 3  # Number of retry attempts
-    retry_delay: int = 5  # Delay between retries in seconds
+    max_tokens: int = 512  # Reduced max tokens for faster responses
+    timeout: int = 60  # 1 minute timeout
+    retry_attempts: int = 2  # Fewer retries
+    retry_delay: int = 3  # Shorter delay between retries
 
 @dataclass
 class AgentConfig:
