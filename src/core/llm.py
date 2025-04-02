@@ -25,13 +25,9 @@ class LLMClient:
             Generated response text
         """
         payload = {
-            "model": self.config.model_name,
+            "model": "llama3.2:1b",
             "prompt": prompt,
-            "stream": False,
-            "options": {
-                "temperature": self.config.temperature,
-                "num_predict": self.config.max_tokens
-            }
+            "stream": False
         }
         
         try:

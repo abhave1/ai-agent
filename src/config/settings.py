@@ -35,7 +35,7 @@ class VectorStoreConfig:
 @dataclass
 class LLMConfig:
     """LLM configuration."""
-    model_name: str = "llama2:3.2b"  # Using Llama 3.2 1B parameter model
+    model_name: str = "llama3.2:1b"  # Using Llama 3.2 1B parameter model
     temperature: float = 0.7
     max_tokens: int = 512
 
