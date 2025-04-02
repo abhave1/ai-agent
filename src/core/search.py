@@ -25,7 +25,13 @@ class WebSearch:
         """
         try:
             results = self.ddgs.text(query, max_results=self.config.max_results)
-            return [result['link'] for result in results]
+            urls = []
+            for result in results:
+                if isinstance(result, dict) and 'link' in result:
+                    urls.append(result['link'])
+                elif hasattr(result, 'link'):
+                    urls.append(result.link)
+            return urls
         except Exception as e:
             print(f"Error during web search: {str(e)}")
             return [] 
