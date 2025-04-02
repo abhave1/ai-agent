@@ -39,7 +39,7 @@ class LLMConfig:
     model_name: str = "llama2:3.2b"  # Using Llama 3.2 1B parameter model
     # temperature: float = 0.7
     # max_tokens: int = 512
-    # timeout: int = 60
+    timeout: int = 60
     retry_attempts: int = 2
     retry_delay: int = 3
 
