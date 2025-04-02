@@ -14,7 +14,6 @@ class SearchConfig:
 @dataclass
 class ScrapingConfig:
     """Web scraping configuration."""
-    timeout: int = 30
     max_retries: int = 3
     wait_for_network_idle: bool = True
     dynamic_content_threshold: int = 1000  # Minimum content length to consider as dynamic
@@ -37,11 +36,8 @@ class VectorStoreConfig:
 class LLMConfig:
     """LLM configuration."""
     model_name: str = "llama2:3.2b"  # Using Llama 3.2 1B parameter model
-    # temperature: float = 0.7
-    # max_tokens: int = 512
-    timeout: int = 60
-    retry_attempts: int = 2
-    retry_delay: int = 3
+    temperature: float = 0.7
+    max_tokens: int = 512
 
 @dataclass
 class AgentConfig:

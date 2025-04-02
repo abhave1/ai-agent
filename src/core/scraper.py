@@ -14,7 +14,6 @@ class WebScraper:
         """Initialize the web scraper."""
         self.config = config
         self.session = requests.Session()
-        self.session.timeout = config.timeout
     
     def scrape(self, url: str) -> Optional[str]:
         """Scrape text content from a URL.
