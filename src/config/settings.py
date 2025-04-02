@@ -36,11 +36,14 @@ class VectorStoreConfig:
 @dataclass
 class LLMConfig:
     """LLM configuration."""
-    model_name: str = "llama2:13b"
+    model_name: str = "llama2"
     temperature: float = 0.7
     max_tokens: int = 2048
     top_p: float = 0.9
     context_window: int = 4096
+    timeout: int = 120  # 2 minutes timeout
+    retry_attempts: int = 3  # Number of retry attempts
+    retry_delay: int = 5  # Delay between retries in seconds
 
 @dataclass
 class AgentConfig:

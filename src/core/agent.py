@@ -8,7 +8,7 @@ from .scraper import WebScraper
 from .parser import ContentParser
 from .embeddings import TextEmbedder
 from .vector_store import VectorStore
-from .llm import LLMInterface
+from .llm import LLMClient
 from ..config.settings import AgentConfig
 
 class AIAgent:
@@ -29,7 +29,7 @@ class AIAgent:
         self.parser = ContentParser()
         self.embedder = TextEmbedder(self.config.embedding)
         self.vector_store = VectorStore(self.config.vector_store)
-        self.llm = LLMInterface(self.config.llm)
+        self.llm = LLMClient(self.config.llm)
     
     def _process_urls(self, urls: List[str]) -> List[str]:
         """
