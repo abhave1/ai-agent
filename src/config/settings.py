@@ -3,7 +3,7 @@ Configuration settings for the AI Agent.
 """
 
 from typing import Dict, Any
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 @dataclass
 class SearchConfig:
@@ -45,11 +45,11 @@ class LLMConfig:
 @dataclass
 class AgentConfig:
     """Main agent configuration."""
-    search: SearchConfig = SearchConfig()
-    scraping: ScrapingConfig = ScrapingConfig()
-    embedding: EmbeddingConfig = EmbeddingConfig()
-    vector_store: VectorStoreConfig = VectorStoreConfig()
-    llm: LLMConfig = LLMConfig()
+    search: SearchConfig = field(default_factory=SearchConfig)
+    scraping: ScrapingConfig = field(default_factory=ScrapingConfig)
+    embedding: EmbeddingConfig = field(default_factory=EmbeddingConfig)
+    vector_store: VectorStoreConfig = field(default_factory=VectorStoreConfig)
+    llm: LLMConfig = field(default_factory=LLMConfig)
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert configuration to dictionary."""

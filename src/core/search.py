@@ -3,7 +3,7 @@ Web search module using DuckDuckGo API.
 """
 
 from typing import List, Dict, Any
-from duckduckgo_search import ddg
+from duckduckgo_search import DDGS
 from ..config.settings import SearchConfig
 
 class WebSearcher:
@@ -12,6 +12,7 @@ class WebSearcher:
     def __init__(self, config: SearchConfig = None):
         """Initialize the web searcher with configuration."""
         self.config = config or SearchConfig()
+        self._ddgs = DDGS()
     
     def search(self, query: str) -> List[Dict[str, Any]]:
         """
@@ -27,20 +28,20 @@ class WebSearcher:
             - snippet: A brief description of the content
         """
         try:
-            results = ddg(
+            results = list(self._ddgs.text(
                 query,
-                max_results=self.config.max_results,
-                timeout=self.config.timeout
-            )
+                max_results=self.config.max_results
+            ))
             
             # Format results into a consistent structure
             formatted_results = []
             for result in results:
-                formatted_results.append({
-                    'title': result.get('title', ''),
-                    'link': result.get('link', ''),
-                    'snippet': result.get('snippet', '')
-                })
+                if result.get('link'):  # Only include results with valid URLs
+                    formatted_results.append({
+                        'title': result.get('title', ''),
+                        'link': result.get('link', ''),
+                        'snippet': result.get('body', '')
+                    })
             
             return formatted_results
             
@@ -59,4 +60,4 @@ class WebSearcher:
             List of URLs from search results
         """
         results = self.search(query)
-        return [result['link'] for result in results if 'link' in result] 
+        return [result['link'] for result in results if result.get('link')] 

@@ -1,0 +1,6 @@
+duckduckgo-search
+playwright
+beautifulsoup4
+sentence-transformers
+faiss-cpu
+requests

@@ -5,8 +5,8 @@ Main entry point for the AI Agent application.
 import os
 import argparse
 from typing import Optional
-from config.settings import DEFAULT_CONFIG
-from core.agent import AIAgent
+from src.config.settings import DEFAULT_CONFIG
+from src.core.agent import AIAgent
 
 def setup_argparse() -> argparse.ArgumentParser:
     """Set up command line argument parsing."""

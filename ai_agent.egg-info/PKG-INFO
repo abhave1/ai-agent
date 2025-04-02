@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: ai-agent
+Version: 0.1
+Requires-Dist: duckduckgo-search
+Requires-Dist: playwright
+Requires-Dist: beautifulsoup4
+Requires-Dist: sentence-transformers
+Requires-Dist: faiss-cpu
+Requires-Dist: requests
+Dynamic: requires-dist
