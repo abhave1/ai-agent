@@ -28,11 +28,11 @@ class LLMClient:
         payload = {
             "model": self.config.model_name,
             "prompt": prompt,
-            "stream": False,
-            "options": {
-                "temperature": self.config.temperature,
-                "num_predict": self.config.max_tokens
-            }
+            "stream": False
+            # "options": {
+            #     "temperature": self.config.temperature,
+            #     "num_predict": self.config.max_tokens
+            # }
         }
         
         for attempt in range(self.config.retry_attempts):
