@@ -5,7 +5,7 @@ Simple LLM client for text generation.
 import requests
 import time
 from typing import Optional
-from ..config.settings import LLMConfig
+from config.settings import LLMConfig  # Adjust the import based on your project structure
 
 class LLMClient:
     """Client for interacting with the LLM service."""
@@ -14,9 +14,8 @@ class LLMClient:
         """Initialize the LLM client."""
         self.config = config
         self.base_url = "http://localhost:11434"
-        self.session = requests.Session()
-        self.session.timeout = (30, config.timeout)
-    
+        self.session = requests.Session()  # Removed the unsupported timeout assignment
+
     def generate(self, prompt: str) -> str:
         """Generate a response using the LLM.
         
@@ -44,7 +43,8 @@ class LLMClient:
                     timeout=(30, self.config.timeout)
                 )
                 response.raise_for_status()
-                return response.json()["response"]
+                # Use .get() to avoid KeyError in case the response format changes
+                return response.json().get("response", "")
                 
             except requests.exceptions.Timeout:
                 if attempt < self.config.retry_attempts - 1:
@@ -56,4 +56,4 @@ class LLMClient:
             except requests.exceptions.RequestException as e:
                 raise Exception(f"Error communicating with Ollama API: {str(e)}")
                 
-        raise Exception("Failed to generate response after all retry attempts") 
+        raise Exception("Failed to generate response after all retry attempts")
