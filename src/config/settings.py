@@ -41,7 +41,7 @@ class LLMConfig:
     # max_tokens: int = 512
     # timeout: int = 60
     retry_attempts: int = 2
-    # retry_delay: int = 3
+    retry_delay: int = 3
 
 @dataclass
 class AgentConfig:
