@@ -40,7 +40,7 @@ class LLMConfig:
     # temperature: float = 0.7
     # max_tokens: int = 512
     # timeout: int = 60
-    # retry_attempts: int = 2
+    retry_attempts: int = 2
     # retry_delay: int = 3
 
 @dataclass
