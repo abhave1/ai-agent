@@ -1,37 +1,24 @@
-"""
-Simple web search module using DuckDuckGo.
-"""
-
 from typing import List
 from duckduckgo_search import DDGS
-from ..config.settings import SearchConfig
+from src.config.settings import SearchConfig
 
+"""
+WebSearch class
+"""
 class WebSearch:
-    """Simple web search using DuckDuckGo."""
-    
     def __init__(self, config: SearchConfig):
-        """Initialize the web search."""
-        self.config = config
+        self.config = config # config found in settings.py
         self.ddgs = DDGS()
     
     def search(self, query: str) -> List[str]:
-        """Search for URLs related to the query.
-        
-        Args:
-            query: Search query
-            
-        Returns:
-            List of relevant URLs
-        """
+        # search -> returns List[str]
         try:
             results = self.ddgs.text(query, max_results=self.config.max_results)
             urls = []
             for result in results:
-                if isinstance(result, dict) and 'link' in result:
-                    urls.append(result['link'])
-                elif hasattr(result, 'link'):
-                    urls.append(result.link)
+                if isinstance(result, dict) and 'href' in result:
+                    urls.append(result['href'])
             return urls
         except Exception as e:
             print(f"Error during web search: {str(e)}")
-            return [] 
+            return []

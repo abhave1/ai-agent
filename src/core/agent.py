@@ -37,7 +37,6 @@ class AIAgent:
             if not urls:
                 return self.llm.generate(query)  # Fallback to direct LLM response
             
-            print(f"Found {len(urls)} URLs")
             # Scrape content from URLs
             contents = []
             for url in urls:
@@ -49,8 +48,6 @@ class AIAgent:
             if not contents:
                 return self.llm.generate(query)  # Fallback to direct LLM response
 
-            print(f"Scraped {len(contents)} contents")
-            
             # Generate embeddings for contents
             embeddings = self.embedding.embed_batch(contents)
             if embeddings is not None:
