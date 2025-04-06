@@ -22,3 +22,7 @@ class WebSearch:
         except Exception as e:
             print(f"Error during web search: {str(e)}")
             return []
+        
+if __name__ == "__main__":
+    search = WebSearch(SearchConfig())
+    print(search.search("McDonalds Menu Items in the US"))

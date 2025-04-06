@@ -2,7 +2,7 @@
 AI Agent that uses web search, scraping, embeddings, and LLM for comprehensive responses.
 """
 
-from typing import List, Optional
+from typing import List, Optional, Dict, Any
 from .search import WebSearch
 from .scraper import WebScraper
 from .embedding import EmbeddingModel
@@ -23,37 +23,22 @@ class AIAgent:
         self.llm = LLMClient(self.config.llm)
     
     def process_query(self, query: str) -> Optional[str]:
-        """Process a user query and generate a response.
-        
-        Args:
-            query: User query
-            
-        Returns:
-            Generated response if successful
-        """
         try:
             # Search for relevant URLs
             urls = self.search.search(query)
-            if not urls:
-                return self.llm.generate(query)  # Fallback to direct LLM response
             
             # Scrape content from URLs
             contents = []
             for url in urls:
-                content = self.scraper.scrape(url)
-                if content:
-                    contents.append(content)
+                result = self.scraper.scrape(url, query)
+                if result:
+                    contents.append(result)
                     
-            
-            if not contents:
-                return self.llm.generate(query)  # Fallback to direct LLM response
-
             # Generate embeddings for contents
-            embeddings = self.embedding.embed_batch(contents)
+            embeddings = self.embedding.embed_batch([content["content"] for content in contents])
             if embeddings is not None:
-                # Add to vector store
-                metadata = [{"text": content} for content in contents]
-                self.vector_store.add(embeddings, metadata)
+                # Add to vector store with full metadata
+                self.vector_store.add(embeddings, [content["metadata"] for content in contents])
             
             # Generate query embedding
             query_embedding = self.embedding.embed(query)
@@ -61,8 +46,11 @@ class AIAgent:
                 # Search for relevant content
                 results = self.vector_store.search(query_embedding)
                 if results:
-                    # Combine relevant texts
-                    context = "\n\n".join(metadata["text"] for metadata, _ in results)
+                    # Combine relevant texts with their sources
+                    context_parts = []
+                    for metadata, _ in results:
+                        context_parts.append(f"Source: {metadata['url']}\nContent: {metadata['text']}")
+                    context = "\n\n".join(context_parts)
                     # Generate response with context
                     return self.llm.generate(f"Context:\n{context}\n\nQuestion: {query}")
             

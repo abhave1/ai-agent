@@ -8,14 +8,13 @@ from dataclasses import dataclass, field
 @dataclass
 class SearchConfig:
     """Search-related configuration."""
-    max_results: int = 5
+    max_results: int = 10
     timeout: int = 30
 
 @dataclass
 class ScrapingConfig:
     """Web scraping configuration."""
     max_retries: int = 3
-    wait_for_network_idle: bool = True
     dynamic_content_threshold: int = 1000  # Minimum content length to consider as dynamic
 
 @dataclass
@@ -35,7 +34,7 @@ class VectorStoreConfig:
 @dataclass
 class LLMConfig:
     """LLM configuration."""
-    model_name: str = "llama3.2:1b"  # Using Llama 3.2 1B parameter model
+    model_name: str = "llama3.1:latest"
     temperature: float = 0.7
     max_tokens: int = 512
 

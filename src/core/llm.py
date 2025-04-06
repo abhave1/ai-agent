@@ -25,7 +25,7 @@ class LLMClient:
             Generated response text
         """
         payload = {
-            "model": "llama3.2:1b",
+            "model": self.config.model,
             "prompt": prompt,
             "stream": False
         }
