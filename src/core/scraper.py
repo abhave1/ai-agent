@@ -6,16 +6,42 @@ from src.config.settings import ScrapingConfig
 class WebScraper:
     def __init__(self, config: ScrapingConfig):
         self.config = config
-        self.playwright = sync_playwright().start()
-        self.browser = self.playwright.chromium.launch()
-        self.context = self.browser.new_context()
+        self.playwright = None
+        self.browser = None
+        self.context = None
+        self._initialize_browser()
+    
+    def _initialize_browser(self):
+        """Initialize the browser and context"""
+        try:
+            self.playwright = sync_playwright().start()
+            self.browser = self.playwright.chromium.launch()
+            self.context = self.browser.new_context()
+        except Exception as e:
+            print(f"Error initializing browser: {str(e)}")
+            self.cleanup()
+            raise
+    
+    def cleanup(self):
+        """Clean up browser resources"""
+        try:
+            if self.context:
+                self.context.close()
+            if self.browser:
+                self.browser.close()
+            if self.playwright:
+                self.playwright.stop()
+        except Exception as e:
+            print(f"Error during cleanup: {str(e)}")
     
     def scrape(self, url: str, query: str) -> Optional[Dict[str, Any]]:
-        # scrape -> returns Optional[Dict] containing content and metadata
+        """Scrape content from a URL"""
+        if not self.context:
+            self._initialize_browser()
+            
         try:
             page = self.context.new_page()
             page.goto(url)
-            
             
             # Scroll to bottom and top twice
             for _ in range(2):
@@ -75,6 +101,5 @@ class WebScraper:
             return None
             
     def __del__(self):
-        self.context.close()
-        self.browser.close()
-        self.playwright.stop()
+        """Cleanup when the object is destroyed"""
+        self.cleanup()
