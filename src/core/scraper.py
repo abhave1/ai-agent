@@ -1,6 +1,7 @@
 from typing import Optional, Dict, Any
-from playwright.sync_api import sync_playwright
+from playwright.async_api import async_playwright
 import time
+import asyncio
 from src.config.settings import ScrapingConfig
 
 class WebScraper:
@@ -9,62 +10,63 @@ class WebScraper:
         self.playwright = None
         self.browser = None
         self.context = None
-        self._initialize_browser()
+        self._loop = asyncio.get_event_loop()
+        self._loop.run_until_complete(self._initialize_browser())
     
-    def _initialize_browser(self):
+    async def _initialize_browser(self):
         """Initialize the browser and context"""
         try:
-            self.playwright = sync_playwright().start()
-            self.browser = self.playwright.chromium.launch()
-            self.context = self.browser.new_context()
+            self.playwright = await async_playwright().start()
+            self.browser = await self.playwright.chromium.launch()
+            self.context = await self.browser.new_context()
         except Exception as e:
             print(f"Error initializing browser: {str(e)}")
-            self.cleanup()
+            await self.cleanup()
             raise
     
-    def cleanup(self):
+    async def cleanup(self):
         """Clean up browser resources"""
         try:
             if self.context:
-                self.context.close()
+                await self.context.close()
             if self.browser:
-                self.browser.close()
+                await self.browser.close()
             if self.playwright:
-                self.playwright.stop()
+                await self.playwright.stop()
         except Exception as e:
             print(f"Error during cleanup: {str(e)}")
     
-    def scrape(self, url: str, query: str) -> Optional[Dict[str, Any]]:
+    async def scrape(self, url: str, query: str) -> Optional[Dict[str, Any]]:
         """Scrape content from a URL"""
         if not self.context:
-            self._initialize_browser()
+            await self._initialize_browser()
             
         try:
-            page = self.context.new_page()
-            page.goto(url)
+            page = await self.context.new_page()
+            await page.goto(url)
             
             # Scroll to bottom and top twice
             for _ in range(2):
                 # Scroll to bottom
-                page.evaluate("""
+                await page.evaluate("""
                     () => {
                         window.scrollTo(0, document.body.scrollHeight);
                     }
                 """)
                 
                 # Scroll to top
-                page.evaluate("""
+                await page.evaluate("""
                     () => {
                         window.scrollTo(0, 0);
                     }
                 """)
             
-            time.sleep(1)
+            await asyncio.sleep(1)
 
-            content = page.content()
+            content = await page.content()
             
             # Extract text content
-            text = page.evaluate(
+            text = await page.evaluate(
                 """
                 () => {
                     // Remove script and style elements
@@ -76,10 +78,10 @@ class WebScraper:
                 }
             """)
             # Get timestamp before closing page
-            timestamp = page.evaluate("() => new Date().toISOString()")
+            timestamp = await page.evaluate("() => new Date().toISOString()")
             
             # Close the page
-            page.close()
+            await page.close()
             # Clean up text
             lines = (line.strip() for line in text.splitlines())
             chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
@@ -102,4 +104,7 @@ class WebScraper:
             
     def __del__(self):
         """Cleanup when the object is destroyed"""
-        self.cleanup()
+        if self._loop.is_running():
+            self._loop.create_task(self.cleanup())
+        else:
+            self._loop.run_until_complete(self.cleanup())
