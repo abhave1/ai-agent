@@ -1,6 +1,6 @@
 from typing import Dict, Any, List
 import numpy as np
-from langchain_community.llms import Ollama
+from langchain_ollama import OllamaLLM
 from langchain_core.messages import BaseMessage
 from langgraph.graph import StateGraph, START, END
 from ..base import BaseAgent, AgentMessage, AgentState
@@ -8,6 +8,7 @@ from ...config.settings import DEFAULT_CONFIG
 from ...core.search import WebSearch
 from ...core.scraper import WebScraper
 from ...core.embedding import EmbeddingModel
+import asyncio
 
 class UserFacingRetriever(BaseAgent):
     """Agent responsible for handling user queries and generating responses"""
@@ -15,15 +16,22 @@ class UserFacingRetriever(BaseAgent):
     def __init__(self):
         super().__init__("user_facing_retriever")
         self.search = WebSearch(DEFAULT_CONFIG.search)
-        self.scraper = WebScraper(DEFAULT_CONFIG.scraping)
+        self.scraper = None  # Initialize lazily
         self.embedding = EmbeddingModel(DEFAULT_CONFIG.embedding)
-        self.llm = Ollama(
+        self.llm = OllamaLLM(
             model=DEFAULT_CONFIG.llm.model_name,
             temperature=DEFAULT_CONFIG.llm.temperature,
             num_predict=DEFAULT_CONFIG.llm.max_tokens
         )
+        self._loop = asyncio.get_event_loop()
         
-    def find_relevant_content(self, query: str) -> Dict[str, Any]:
+    def _get_scraper(self):
+        """Get or initialize the scraper"""
+        if self.scraper is None:
+            self.scraper = WebScraper(DEFAULT_CONFIG.scraping)
+        return self.scraper
+        
+    async def find_relevant_content(self, query: str) -> Dict[str, Any]:
         """Find relevant content for a query using semantic search"""
         # Generate embedding for the query
         query_embedding = self.embedding.embed(query)
@@ -48,8 +56,10 @@ class UserFacingRetriever(BaseAgent):
         # If no background data, search and collect new content
         urls = self.search.search(query)
         relevant_content = []
+        scraper = self._get_scraper()
+        
         for url in urls:
-            scraped_content = self.scraper.scrape(url, query)
+            scraped_content = await scraper.scrape(url, query)
             if scraped_content:
                 content_embedding = self.embedding.embed(scraped_content["content"])
                 if content_embedding is not None:
@@ -74,7 +84,7 @@ class UserFacingRetriever(BaseAgent):
             self.state["user_query"] = query
             
             # Find relevant content
-            content_result = self.find_relevant_content(query)
+            content_result = self._loop.run_until_complete(self.find_relevant_content(query))
             if content_result["status"] == "error":
                 return content_result
                 
@@ -106,4 +116,12 @@ class UserFacingRetriever(BaseAgent):
         workflow.add_edge("retrieve", "process")
         workflow.add_edge("process", END)
         
-        return workflow.compile() 
+        return workflow.compile()
+        
+    def __del__(self):
+        """Cleanup when the object is destroyed"""
+        if self.scraper:
+            if self._loop.is_running():
+                self._loop.create_task(self.scraper.cleanup())
+            else:
+                self._loop.run_until_complete(self.scraper.cleanup()) 
