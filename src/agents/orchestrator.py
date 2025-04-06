@@ -5,6 +5,7 @@ from .base import BaseAgent, AgentMessage, AgentState
 from .background.collector import BackgroundCollector
 from .user_facing.retriever import UserFacingRetriever
 from ..config.settings import DEFAULT_CONFIG
+import asyncio
 
 class AgentOrchestrator:
     """Manages communication and workflow between agents"""
@@ -22,31 +23,33 @@ class AgentOrchestrator:
             user_query=""
         )
         self.memory = MemorySaver()
+        self._loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(self._loop)
         
-    def route_message(self, message: AgentMessage) -> Dict[str, Any]:
+    async def route_message(self, message: AgentMessage) -> Dict[str, Any]:
         """Route message to appropriate agent"""
         if message.receiver in self.agents:
             agent = self.agents[message.receiver]
-            return agent.process_message(message)
+            return await agent.process_message(message)
         return {"status": "error", "message": f"Unknown agent: {message.receiver}"}
         
-    def schedule_background_collection(self, topic: str) -> Dict[str, Any]:
+    async def schedule_background_collection(self, topic: str) -> Dict[str, Any]:
         """Schedule background collection for a topic"""
         message = AgentMessage(
             sender="orchestrator",
             receiver="background_collector",
             content={"type": "collect", "topic": topic}
         )
-        return self.route_message(message)
+        return await self.route_message(message)
         
-    def handle_user_query(self, query: str) -> Dict[str, Any]:
+    async def handle_user_query(self, query: str) -> Dict[str, Any]:
         """Handle user query through the user-facing agent"""
         message = AgentMessage(
             sender="orchestrator",
             receiver="user_facing_retriever",
             content={"type": "query", "query": query}
         )
-        return self.route_message(message)
+        return await self.route_message(message)
         
     def build_workflow_graph(self) -> StateGraph:
         """Build the complete workflow graph"""
@@ -64,10 +67,17 @@ class AgentOrchestrator:
         
         return workflow.compile()
         
-    def run_workflow(self, input_data: Dict[str, Any], config: Dict[str, Any] = None) -> Dict[str, Any]:
+    async def run_workflow(self, input_data: Dict[str, Any]) -> Dict[str, Any]:
         """Run the complete workflow"""
-        workflow = self.build_workflow_graph()
-        if config is None:
-            config = {"configurable": {"thread_id": "1"}}
-        result = workflow.invoke(input_data, config)
-        return result 
+        # Step 1: Background collection
+        collection_result = await self.schedule_background_collection(input_data["topic"])
+        if collection_result["status"] == "error":
+            return collection_result
+            
+        # Step 2: Handle user query
+        query_result = await self.handle_user_query(input_data["query"])
+        return query_result
+        
+    def __del__(self):
+        """Cleanup when the object is destroyed"""
+        self._loop.close() 

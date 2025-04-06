@@ -1,33 +1,36 @@
 from src.agents.orchestrator import AgentOrchestrator
-from src.config.settings import DEFAULT_CONFIG
+import asyncio
 
-def main():
+async def main():
     # Initialize the orchestrator
     orchestrator = AgentOrchestrator()
     
-    # Example 1: Schedule background collection
-    print("\nExample 1: Scheduling background collection")
-    collection_result = orchestrator.schedule_background_collection(
-        "latest developments in artificial intelligence"
-    )
-    print(f"Collection result: {collection_result}")
-    
-    # Example 2: Handle a user query
-    print("\nExample 2: Handling user query")
-    query_result = orchestrator.handle_user_query(
-        "What are the recent breakthroughs in AI?"
-    )
-    print(f"Query result: {query_result}")
-    
-    # Example 3: Run complete workflow
-    print("\nExample 3: Running complete workflow")
-    workflow_input = {
-        "type": "workflow",
-        "topic": "quantum computing applications",
-        "query": "How is quantum computing being used in real-world applications?"
-    }
-    workflow_result = orchestrator.run_workflow(workflow_input)
-    print(f"Workflow result: {workflow_result}")
+    try:
+        # Example 1: Schedule background collection
+        print("\nExample 1: Scheduling background collection\n")
+        collection_result = await orchestrator.schedule_background_collection(
+            "latest developments in artificial intelligence"
+        )
+        print(f"Collection result: {collection_result}")
+        
+        # Example 2: Handle user query
+        print("\nExample 2: Handling user query\n")
+        query_result = await orchestrator.handle_user_query(
+            "What are the latest developments in AI?"
+        )
+        print(f"Query result: {query_result}")
+        
+        # Example 3: Run complete workflow
+        print("\nExample 3: Running complete workflow\n")
+        workflow_result = await orchestrator.run_workflow({
+            "topic": "artificial intelligence",
+            "query": "What are the latest developments in AI?"
+        })
+        print(f"Workflow result: {workflow_result}")
+        
+    finally:
+        # Cleanup
+        del orchestrator
 
 if __name__ == "__main__":
-    main() 
+    asyncio.run(main()) 

@@ -28,15 +28,17 @@ class BackgroundCollector(BaseAgent):
             temperature=DEFAULT_CONFIG.llm.temperature,
             num_predict=DEFAULT_CONFIG.llm.max_tokens
         )
-        self._loop = asyncio.get_event_loop()
+        self._loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(self._loop)
         print(f"BackgroundCollector initialized in {time.time() - start_time:.2f} seconds")
         
-    def _get_scraper(self):
+    async def _get_scraper(self):
         """Get or initialize the scraper"""
         if self.scraper is None:
             print("Initializing WebScraper...")
             start_time = time.time()
             self.scraper = WebScraper(DEFAULT_CONFIG.scraping)
+            await self.scraper._initialize_browser()
             print(f"WebScraper initialized in {time.time() - start_time:.2f} seconds")
         return self.scraper
         
@@ -55,7 +57,7 @@ class BackgroundCollector(BaseAgent):
             # Scrape content from URLs
             print("Starting content scraping...")
             collected_data = []
-            scraper = self._get_scraper()
+            scraper = await self._get_scraper()
             
             for i, url in enumerate(urls, 1):
                 try:
@@ -104,13 +106,13 @@ class BackgroundCollector(BaseAgent):
                 "error": str(e)
             }
         
-    def process_message(self, message: AgentMessage) -> Dict[str, Any]:
+    async def process_message(self, message: AgentMessage) -> Dict[str, Any]:
         """Process incoming messages and trigger appropriate actions"""
         print(f"\nProcessing message of type: {message.content.get('type')}")
         if message.content.get("type") == "collect":
             topic = message.content.get("topic")
             print(f"Starting collection for topic: {topic}")
-            results = self._loop.run_until_complete(self.search_and_collect(topic))
+            results = await self.search_and_collect(topic)
             
             # Store the collected data in the state
             self.state["background_data"][topic] = results
@@ -146,4 +148,5 @@ class BackgroundCollector(BaseAgent):
             if self._loop.is_running():
                 self._loop.create_task(self.scraper.cleanup())
             else:
-                self._loop.run_until_complete(self.scraper.cleanup()) 
+                self._loop.run_until_complete(self.scraper.cleanup())
+        self._loop.close() 

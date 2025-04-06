@@ -23,12 +23,14 @@ class UserFacingRetriever(BaseAgent):
             temperature=DEFAULT_CONFIG.llm.temperature,
             num_predict=DEFAULT_CONFIG.llm.max_tokens
         )
-        self._loop = asyncio.get_event_loop()
+        self._loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(self._loop)
         
-    def _get_scraper(self):
+    async def _get_scraper(self):
         """Get or initialize the scraper"""
         if self.scraper is None:
             self.scraper = WebScraper(DEFAULT_CONFIG.scraping)
+            await self.scraper._initialize_browser()
         return self.scraper
         
     async def find_relevant_content(self, query: str) -> Dict[str, Any]:
@@ -56,7 +58,7 @@ class UserFacingRetriever(BaseAgent):
         # If no background data, search and collect new content
         urls = self.search.search(query)
         relevant_content = []
-        scraper = self._get_scraper()
+        scraper = await self._get_scraper()
         
         for url in urls:
             scraped_content = await scraper.scrape(url, query)
@@ -77,14 +79,14 @@ class UserFacingRetriever(BaseAgent):
             "source": "new_search"
         }
         
-    def process_message(self, message: AgentMessage) -> Dict[str, Any]:
+    async def process_message(self, message: AgentMessage) -> Dict[str, Any]:
         """Process incoming messages and generate responses"""
         if message.content.get("type") == "query":
             query = message.content.get("query")
             self.state["user_query"] = query
             
             # Find relevant content
-            content_result = self._loop.run_until_complete(self.find_relevant_content(query))
+            content_result = await self.find_relevant_content(query)
             if content_result["status"] == "error":
                 return content_result
                 
@@ -124,4 +126,5 @@ class UserFacingRetriever(BaseAgent):
             if self._loop.is_running():
                 self._loop.create_task(self.scraper.cleanup())
             else:
-                self._loop.run_until_complete(self.scraper.cleanup()) 
+                self._loop.run_until_complete(self.scraper.cleanup())
+        self._loop.close() 
