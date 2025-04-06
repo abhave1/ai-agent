@@ -7,7 +7,7 @@ from src.config.settings import ScrapingConfig
 class WebScraper:
     """Handles web scraping operations using Playwright"""
     
-    def __init__(self, config: Dict[str, Any]):
+    def __init__(self, config: ScrapingConfig):
         self.config = config
         self.browser: Optional[Browser] = None
         self._loop = asyncio.get_event_loop()
@@ -16,7 +16,7 @@ class WebScraper:
         """Initialize the browser"""
         playwright = await async_playwright().start()
         self.browser = await playwright.chromium.launch(
-            headless=self.config.get("headless", True)
+            headless=self.config.headless
         )
         
     async def scrape(self, url: str, topic: str) -> Optional[Dict[str, Any]]:
@@ -26,7 +26,7 @@ class WebScraper:
             
         try:
             page = await self.browser.new_page()
-            await page.goto(url, timeout=self.config.get("timeout", 30000))
+            await page.goto(url, timeout=self.config.timeout)
             
             # Scroll to load dynamic content
             await page.evaluate("""
