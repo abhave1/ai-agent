@@ -16,6 +16,8 @@ class ScrapingConfig:
     """Web scraping configuration."""
     max_retries: int = 3
     dynamic_content_threshold: int = 1000  # Minimum content length to consider as dynamic
+    headless: bool = True  # Whether to run the browser in headless mode
+    timeout: int = 30000  # Page load timeout in milliseconds
 
 @dataclass
 class EmbeddingConfig:
