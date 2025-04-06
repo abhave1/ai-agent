@@ -23,8 +23,7 @@ class UserFacingRetriever(BaseAgent):
             temperature=DEFAULT_CONFIG.llm.temperature,
             num_predict=DEFAULT_CONFIG.llm.max_tokens
         )
-        self._loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(self._loop)
+        self._loop = asyncio.get_event_loop()
         
     async def _get_scraper(self):
         """Get or initialize the scraper"""
@@ -122,9 +121,5 @@ class UserFacingRetriever(BaseAgent):
         
     def __del__(self):
         """Cleanup when the object is destroyed"""
-        if self.scraper:
-            if self._loop.is_running():
-                self._loop.create_task(self.scraper.cleanup())
-            else:
-                self._loop.run_until_complete(self.scraper.cleanup())
-        self._loop.close() 
+        if self.scraper and self._loop.is_running():
+            self._loop.create_task(self.scraper.cleanup()) 

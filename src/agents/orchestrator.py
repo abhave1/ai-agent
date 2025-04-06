@@ -23,8 +23,7 @@ class AgentOrchestrator:
             user_query=""
         )
         self.memory = MemorySaver()
-        self._loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(self._loop)
+        self._loop = asyncio.get_event_loop()
         
     async def route_message(self, message: AgentMessage) -> Dict[str, Any]:
         """Route message to appropriate agent"""
@@ -76,8 +75,4 @@ class AgentOrchestrator:
             
         # Step 2: Handle user query
         query_result = await self.handle_user_query(input_data["query"])
-        return query_result
-        
-    def __del__(self):
-        """Cleanup when the object is destroyed"""
-        self._loop.close() 
+        return query_result 
