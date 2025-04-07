@@ -21,7 +21,8 @@ class UserFacingRetriever(BaseAgent):
         self.llm = OllamaLLM(
             model=DEFAULT_CONFIG.llm.model_name,
             temperature=DEFAULT_CONFIG.llm.temperature,
-            num_predict=DEFAULT_CONFIG.llm.max_tokens
+            num_predict=DEFAULT_CONFIG.llm.max_tokens,
+            base_url=DEFAULT_CONFIG.llm.base_url
         )
         self._loop = asyncio.get_event_loop()
         
@@ -91,14 +92,12 @@ class UserFacingRetriever(BaseAgent):
                 
             # Generate response using LLM
             context = "\n\n".join([item["content"] for item in content_result["content"]])
-            response = self.llm.invoke([
-                {"role": "system", "content": "You are a helpful AI assistant."},
-                {"role": "user", "content": f"Based on this context: {context}\n\nAnswer this query: {query}"}
-            ])
+            prompt = f"Based on this context: {context}\n\nAnswer this query: {query}"
+            response = self.llm.invoke(prompt)
             
             return {
                 "status": "success",
-                "response": response.content,
+                "response": response,  # response is already a string
                 "context": content_result["content"],
                 "source": content_result["source"]
             }

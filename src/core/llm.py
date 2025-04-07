@@ -12,7 +12,7 @@ class LLMClient:
     def __init__(self, config: LLMConfig):
         """Initialize the LLM client."""
         self.config = config
-        self.base_url = "http://localhost:11434"
+        self.base_url = "http://127.0.0.1:35129"
         self.session = requests.Session()
     
     def generate(self, prompt: str) -> str:
