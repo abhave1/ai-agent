@@ -6,12 +6,12 @@ async def main():
     orchestrator = AgentOrchestrator()
     
     try:
-        # Example 1: Schedule background collection
-        print("\nExample 1: Scheduling background collection\n")
-        collection_result = await orchestrator.schedule_background_collection(
-            "latest developments in artificial intelligence"
-        )
-        print(f"Collection result: {collection_result}")
+        # # Example 1: Schedule background collection
+        # print("\nExample 1: Scheduling background collection\n")
+        # collection_result = await orchestrator.schedule_background_collection(
+        #     "latest developments in artificial intelligence"
+        # )
+        # print(f"Collection result: {collection_result}")
         
         # Example 2: Handle user query
         print("\nExample 2: Handling user query\n")
@@ -20,13 +20,13 @@ async def main():
         )
         print(f"Query result: {query_result}")
         
-        # Example 3: Run complete workflow
-        print("\nExample 3: Running complete workflow\n")
-        workflow_result = await orchestrator.run_workflow({
-            "topic": "artificial intelligence",
-            "query": "What are the latest developments in AI?"
-        })
-        print(f"Workflow result: {workflow_result}")
+        # # Example 3: Run complete workflow
+        # print("\nExample 3: Running complete workflow\n")
+        # workflow_result = await orchestrator.run_workflow({
+        #     "topic": "artificial intelligence",
+        #     "query": "What are the latest developments in AI?"
+        # })
+        # print(f"Workflow result: {workflow_result}")
         
     finally:
         # Cleanup

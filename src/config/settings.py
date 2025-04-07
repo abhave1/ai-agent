@@ -39,7 +39,7 @@ class LLMConfig:
     model_name: str = "llama3.1:latest"
     temperature: float = 0.7
     max_tokens: int = 512
-    base_url: str = "http://127.0.0.1:35129"
+    base_url: str = "10.139.126.3:11434"
 
 @dataclass
 class AgentConfig:
