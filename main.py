@@ -1,4 +1,4 @@
-from src.agents.orchestrator import AgentOrchestrator
+from agents.orchestrator import AgentOrchestrator
 import asyncio
 
 async def main():

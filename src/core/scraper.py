@@ -6,7 +6,7 @@ from typing import Dict, Any, Optional
 from playwright.async_api import async_playwright, Browser, Page
 import asyncio
 import time
-from src.config.settings import ScrapingConfig
+from config.settings import ScrapingConfig
 
 class WebScraper:
     """Handles web scraping operations using Playwright"""

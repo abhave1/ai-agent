@@ -1,7 +1,7 @@
 from typing import List, Optional
 import numpy as np
 from sentence_transformers import SentenceTransformer
-from src.config.settings import EmbeddingConfig
+from config.settings import EmbeddingConfig
 
 class EmbeddingModel:
     """Embedding model using sentence-transformers."""

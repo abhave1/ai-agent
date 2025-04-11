@@ -1,6 +1,6 @@
 from typing import List
 from duckduckgo_search import DDGS
-from src.config.settings import SearchConfig
+from config.settings import SearchConfig
 
 """
 WebSearch class
