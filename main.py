@@ -33,4 +33,4 @@ async def main():
         del orchestrator
 
 if __name__ == "__main__":
-    asyncio.run(main()) 
+    main()

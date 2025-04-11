@@ -1,20 +1,27 @@
 """
-Simple vector store using FAISS.
+Vector store implementation using ChromaDB.
 """
 
-import faiss
+import chromadb
+from chromadb.config import Settings
 import numpy as np
 from typing import List, Dict, Any, Tuple
 from ..config.settings import VectorStoreConfig
 
 class VectorStore:
-    """Simple vector store using FAISS."""
+    """Vector store implementation using ChromaDB."""
     
     def __init__(self, config: VectorStoreConfig):
         """Initialize the vector store."""
         self.config = config
-        self.index = None
-        self.metadata = []
+        self.client = chromadb.Client(Settings(
+            persist_directory=config.persist_directory,
+            anonymized_telemetry=False
+        ))
+        self.collection = self.client.get_or_create_collection(
+            name=config.collection_name,
+            metadata={"hnsw:space": "cosine"}
+        )
     
     def add(self, embeddings: np.ndarray, metadata: List[Dict[str, Any]] = None) -> None:
         """Add embeddings to the vector store.
@@ -26,17 +33,18 @@ class VectorStore:
         if embeddings is None or len(embeddings) == 0:
             return
             
-        # Initialize index if needed
-        if self.index is None:
-            dimension = embeddings.shape[1]
-            self.index = faiss.IndexFlatL2(dimension)
+        # Convert embeddings to list of lists for ChromaDB
+        embeddings_list = embeddings.tolist()
         
-        # Add embeddings to index
-        self.index.add(embeddings.astype('float32'))
+        # Generate IDs for the embeddings
+        ids = [str(i) for i in range(len(embeddings_list))]
         
-        # Add metadata if provided
-        if metadata:
-            self.metadata.extend(metadata)
+        # Add to collection
+        self.collection.add(
+            embeddings=embeddings_list,
+            ids=ids,
+            metadatas=metadata if metadata else None
+        )
     
     def search(self, query_embedding: np.ndarray) -> List[Tuple[Dict[str, Any], float]]:
         """Search for similar embeddings.
@@ -47,27 +55,31 @@ class VectorStore:
         Returns:
             List of (metadata, distance) tuples
         """
-        if self.index is None or self.index.ntotal == 0:
-            return []
-            
-        # Search in index
-        distances, indices = self.index.search(
-            query_embedding.reshape(1, -1).astype('float32'),
-            min(self.config.top_k, self.index.ntotal)
+        # Convert query embedding to list
+        query_embedding_list = query_embedding.tolist()
+        
+        # Search in collection
+        results = self.collection.query(
+            query_embeddings=[query_embedding_list],
+            n_results=min(self.config.top_k, self.collection.count())
         )
         
-        # Get results with metadata
-        results = []
-        for i, (idx, distance) in enumerate(zip(indices[0], distances[0])):
-            if idx < len(self.metadata):
-                results.append((self.metadata[idx], float(distance)))
+        # Format results
+        formatted_results = []
+        for i in range(len(results['ids'][0])):
+            metadata = results['metadatas'][0][i] if results['metadatas'] else {}
+            distance = 1 - results['distances'][0][i]  # Convert cosine similarity to distance
+            formatted_results.append((metadata, float(distance)))
         
-        return results
+        return formatted_results
     
     def clear(self) -> None:
         """Clear the vector store."""
-        self.index = None
-        self.metadata = []
+        self.client.delete_collection(self.config.collection_name)
+        self.collection = self.client.get_or_create_collection(
+            name=self.config.collection_name,
+            metadata={"hnsw:space": "cosine"}
+        )
     
     def get_size(self) -> int:
         """
@@ -76,33 +88,18 @@ class VectorStore:
         Returns:
             int: Number of vectors
         """
-        return self.index.ntotal if self.index is not None else 0
+        return self.collection.count()
     
-    def save(self, index_path: str, metadata_path: str) -> None:
+    def save(self) -> None:
         """
         Save the vector store to disk.
-        
-        Args:
-            index_path: Path to save the FAISS index
-            metadata_path: Path to save the metadata
+        Note: ChromaDB automatically persists data to disk.
         """
-        if self.index is not None:
-            faiss.write_index(self.index, index_path)
-            # Save metadata (you might want to use a proper serialization method)
-            import json
-            with open(metadata_path, 'w') as f:
-                json.dump(self.metadata, f)
+        self.client.persist()
     
-    def load(self, index_path: str, metadata_path: str) -> None:
+    def load(self) -> None:
         """
         Load the vector store from disk.
-        
-        Args:
-            index_path: Path to the FAISS index
-            metadata_path: Path to the metadata
+        Note: ChromaDB automatically loads data from disk when initializing the client.
         """
-        self.index = faiss.read_index(index_path)
-        # Load metadata (you might want to use a proper deserialization method)
-        import json
-        with open(metadata_path, 'r') as f:
-            self.metadata = json.load(f) 
+        pass  # No explicit load needed as ChromaDB handles persistence automatically 

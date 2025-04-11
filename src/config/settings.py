@@ -17,7 +17,7 @@ class ScrapingConfig:
     max_retries: int = 3
     dynamic_content_threshold: int = 1000  # Minimum content length to consider as dynamic
     headless: bool = True  # Whether to run the browser in headless mode
-    timeout: int = 30000  # Page load timeout in milliseconds
+    timeout: int = 5000  # Page load timeout in milliseconds
 
 @dataclass
 class EmbeddingConfig:
@@ -29,9 +29,9 @@ class EmbeddingConfig:
 @dataclass
 class VectorStoreConfig:
     """Vector store configuration."""
-    index_type: str = "FlatL2"
-    similarity_metric: str = "cosine"
-    top_k: int = 3
+    persist_directory: str = "data/chroma"  # Directory to persist ChromaDB data
+    collection_name: str = "default"  # Name of the ChromaDB collection
+    top_k: int = 3  # Number of results to return in search
 
 @dataclass
 class LLMConfig:
