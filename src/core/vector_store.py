@@ -8,7 +8,6 @@ import numpy as np
 from typing import List, Dict, Any, Tuple
 from config.settings import VectorStoreConfig
 import os
-import multiprocessing
 
 class VectorStore:
     """Vector store implementation using ChromaDB."""
@@ -20,26 +19,20 @@ class VectorStore:
         # Create persist directory if it doesn't exist
         os.makedirs(config.persist_directory, exist_ok=True)
         
-        # Use PersistentClient for better persistence support
-        self.client = chromadb.PersistentClient(
-            path=config.persist_directory,
-            settings=Settings(anonymized_telemetry=False)
+        # Use HTTP client instead of direct client
+        self.client = chromadb.HttpClient(
+            host="localhost",
+            port=8000,
+            settings=Settings(
+                anonymized_telemetry=False,
+                is_persistent=True,
+                persist_directory=config.persist_directory
+            )
         )
-        
-        # Get number of available CPU cores, use at most 4
-        num_threads = min(multiprocessing.cpu_count(), 4)
-        
-        # Configure HNSW parameters
-        hnsw_config = {
-            "hnsw:space": "cosine",
-            "hnsw:construction_ef": 100,
-            "hnsw:search_ef": 100,
-            "hnsw:num_threads": num_threads
-        }
         
         self.collection = self.client.get_or_create_collection(
             name=config.collection_name,
-            metadata=hnsw_config
+            metadata={"hnsw:space": "cosine"}
         )
     
     def add(self, embeddings: np.ndarray, metadata: List[Dict[str, Any]] = None) -> None:
