@@ -8,6 +8,7 @@ import numpy as np
 from typing import List, Dict, Any, Tuple
 from config.settings import VectorStoreConfig
 import os
+import multiprocessing
 
 class VectorStore:
     """Vector store implementation using ChromaDB."""
@@ -25,9 +26,20 @@ class VectorStore:
             settings=Settings(anonymized_telemetry=False)
         )
         
+        # Get number of available CPU cores, use at most 4
+        num_threads = min(multiprocessing.cpu_count(), 4)
+        
+        # Configure HNSW parameters
+        hnsw_config = {
+            "hnsw:space": "cosine",
+            "hnsw:construction_ef": 100,
+            "hnsw:search_ef": 100,
+            "hnsw:num_threads": num_threads
+        }
+        
         self.collection = self.client.get_or_create_collection(
             name=config.collection_name,
-            metadata={"hnsw:space": "cosine"}
+            metadata=hnsw_config
         )
     
     def add(self, embeddings: np.ndarray, metadata: List[Dict[str, Any]] = None) -> None:
