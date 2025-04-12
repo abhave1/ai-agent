@@ -6,7 +6,8 @@ import chromadb
 from chromadb.config import Settings
 import numpy as np
 from typing import List, Dict, Any, Tuple
-from ..config.settings import VectorStoreConfig
+from config.settings import VectorStoreConfig
+import os
 
 class VectorStore:
     """Vector store implementation using ChromaDB."""
@@ -14,10 +15,16 @@ class VectorStore:
     def __init__(self, config: VectorStoreConfig):
         """Initialize the vector store."""
         self.config = config
-        self.client = chromadb.Client(Settings(
-            persist_directory=config.persist_directory,
-            anonymized_telemetry=False
-        ))
+        
+        # Create persist directory if it doesn't exist
+        os.makedirs(config.persist_directory, exist_ok=True)
+        
+        # Use PersistentClient for better persistence support
+        self.client = chromadb.PersistentClient(
+            path=config.persist_directory,
+            settings=Settings(anonymized_telemetry=False)
+        )
+        
         self.collection = self.client.get_or_create_collection(
             name=config.collection_name,
             metadata={"hnsw:space": "cosine"}
@@ -82,24 +89,4 @@ class VectorStore:
         )
     
     def get_size(self) -> int:
-        """
-        Get the number of vectors in the store.
-        
-        Returns:
-            int: Number of vectors
-        """
         return self.collection.count()
-    
-    def save(self) -> None:
-        """
-        Save the vector store to disk.
-        Note: ChromaDB automatically persists data to disk.
-        """
-        self.client.persist()
-    
-    def load(self) -> None:
-        """
-        Load the vector store from disk.
-        Note: ChromaDB automatically loads data from disk when initializing the client.
-        """
-        pass  # No explicit load needed as ChromaDB handles persistence automatically 

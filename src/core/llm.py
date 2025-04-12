@@ -4,7 +4,7 @@ Simple LLM client for text generation.
 
 import requests
 from typing import Optional
-from ..config.settings import LLMConfig
+from config.settings import LLMConfig
 
 class LLMClient:
     """Client for interacting with the LLM service."""

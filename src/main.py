@@ -29,7 +29,7 @@ async def main():
     agent = AIAgent(DEFAULT_CONFIG)
     
     # Process the query
-    await process_query(agent, "What is the capital of France?")
+    await process_query(agent, "Find me a list of recipies that I can make with chicken and is a part of the italian cuisine.")
 
 if __name__ == "__main__":
     asyncio.run(main()) 

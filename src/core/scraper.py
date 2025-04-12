@@ -98,3 +98,8 @@ class WebScraper:
         """Cleanup when the object is destroyed"""
         if self.browser and self._loop.is_running():
             self._loop.create_task(self.cleanup())
+            
+if __name__ == "__main__":
+    config = ScrapingConfig(headless=False)
+    scraper = WebScraper(config)
+    asyncio.run(scraper.scrape("https://www.google.com", "test"))
