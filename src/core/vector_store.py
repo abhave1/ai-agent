@@ -19,14 +19,12 @@ class VectorStore:
         # Create persist directory if it doesn't exist
         os.makedirs(config.persist_directory, exist_ok=True)
         
-        # Use HTTP client instead of direct client
-        self.client = chromadb.HttpClient(
-            host="localhost",
-            port=8000,
+        # Use PersistentClient instead of HttpClient
+        self.client = chromadb.PersistentClient(
+            path=config.persist_directory,
             settings=Settings(
                 anonymized_telemetry=False,
-                is_persistent=True,
-                persist_directory=config.persist_directory
+                is_persistent=True
             )
         )
         
@@ -70,10 +68,15 @@ class VectorStore:
         # Convert query embedding to list
         query_embedding_list = query_embedding.tolist()
         
+        # Get collection size and ensure we request at least 1 result if collection is not empty
+        collection_size = self.collection.count()
+        if collection_size == 0:
+            return []
+        
         # Search in collection
         results = self.collection.query(
             query_embeddings=[query_embedding_list],
-            n_results=min(self.config.top_k, self.collection.count())
+            n_results=min(self.config.top_k, max(1, collection_size))
         )
         
         # Format results

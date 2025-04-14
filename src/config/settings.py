@@ -37,8 +37,8 @@ class VectorStoreConfig:
 class LLMConfig:
     """LLM configuration."""
     model_name: str = "llama3.2:1b"
-    temperature: float = 0.7
-    max_tokens: int = 512
+    temperature: float = 0.0  # Set to 0 for deterministic, factual responses
+    max_tokens: int = 2048  # Increased for longer structured responses
     base_url: str = "http://127.0.0.1:11434"
 
 @dataclass
@@ -61,4 +61,4 @@ class AgentConfig:
         }
 
 # Default configuration instance
-DEFAULT_CONFIG = AgentConfig() 
+DEFAULT_CONFIG = AgentConfig()
