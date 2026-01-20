@@ -33,7 +33,7 @@ class MCPConfig:
 @dataclass
 class LLMConfig:
     """LLM configuration."""
-    model_name: str = "meta-llama/llama-4-scout-17b-16e-instruct"
+    # model_name: str = "meta-llama/llama-4-scout-17b-16e-instruct"
     temperature: float = 0.0  # Set to 1 for more creative responses
     max_tokens: int = 1024  # Reduced for Groq API
     base_url: str = "https://api.groq.com/openai/v1"
